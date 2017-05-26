@@ -1,0 +1,116 @@
+[
+    {
+        "id": "ba5f5fe1.d363d",
+        "type": "debug",
+        "z": "91cecc1a.9040c",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 370,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "27528656.0ad39a",
+        "type": "inject",
+        "z": "91cecc1a.9040c",
+        "name": "",
+        "topic": "",
+        "payload": "Toggle",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 90,
+        "y": 80,
+        "wires": [
+            [
+                "ec85ecce.274aa"
+            ]
+        ]
+    },
+    {
+        "id": "2fed1cd4.2ff324",
+        "type": "mqtt in",
+        "z": "91cecc1a.9040c",
+        "name": "Slampher's feedback to the above trigger from the \"Trigger Node\"",
+        "topic": "Actuation response:",
+        "qos": "1",
+        "broker": "870590e3.2f7dd",
+        "x": 250,
+        "y": 340,
+        "wires": [
+            [
+                "ba5f5fe1.d363d"
+            ]
+        ]
+    },
+    {
+        "id": "ec85ecce.274aa",
+        "type": "mqtt out",
+        "z": "91cecc1a.9040c",
+        "name": "Trigger Node",
+        "topic": "my/topic/sugar",
+        "qos": "",
+        "retain": "",
+        "broker": "870590e3.2f7dd",
+        "x": 110,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "4ad80737.edc9c8",
+        "type": "mqtt in",
+        "z": "91cecc1a.9040c",
+        "name": "Slampher's Button message",
+        "topic": "mOS/topic1",
+        "qos": "1",
+        "broker": "870590e3.2f7dd",
+        "x": 140,
+        "y": 280,
+        "wires": [
+            [
+                "ba5f5fe1.d363d"
+            ]
+        ]
+    },
+    {
+        "id": "6fcfdb4a.595ec4",
+        "type": "comment",
+        "z": "91cecc1a.9040c",
+        "name": "MQTT Trigger",
+        "info": "Triggers messages and toggle the led's (GPIO13) state (inversed)to be send to the Slampher\nover MQTT the \"Trigger Node\"",
+        "x": 90,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "d954c5ba.c16138",
+        "type": "comment",
+        "z": "91cecc1a.9040c",
+        "name": "MQTT in",
+        "info": "Topic \"mOS/topic1\" receives message triggered by \nSlampher's Button (GPIO0) press\n\nTopic \"Actuation response:\" receives message \ntriggered by message sent from the above:\n\"Trigger Node\"",
+        "x": 80,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "870590e3.2f7dd",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    }
+]

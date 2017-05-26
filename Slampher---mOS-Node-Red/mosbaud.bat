@@ -1,0 +1,1 @@
+mos.exe ui --baud-rate 115200

@@ -1,0 +1,32 @@
+load('api_gpio.js');
+load('api_mqtt.js');
+load('api_sys.js');
+load('api_timer.js');
+
+let led = 13;  
+GPIO.set_mode(led, GPIO.MODE_OUTPUT);
+
+// Subscription to MQTT
+MQTT.sub('my/topic/#', function(conn, topic, message) {
+  print('MQTT Income Message: ', 'topic:', topic, 'message:', message);
+  let value = GPIO.toggle(led);
+  topic = 'Actuation response:';
+  message = JSON.stringify({
+    Led: value,
+    Input: message
+  });
+  let ok = MQTT.pub(topic, message, message.length);
+  print('Published:', ok ? 'yes' : 'no', 'topic:', topic, message);
+}, null);
+
+// Publish to MQTT topic on a button press. Button is wired to GPIO pin 0
+GPIO.set_button_handler(0, GPIO.PULL_UP, GPIO.INT_EDGE_NEG, 200, function() {
+  let topic = 'mOS/topic1';
+  let message = JSON.stringify({
+    total_ram: Sys.total_ram(),
+    free_ram: Sys.free_ram(),
+    uptime: Sys.uptime()
+  });
+  let ok = MQTT.pub(topic, message, message.length);
+  print('Published:', ok ? 'yes' : 'no', 'topic:', topic, 'message:', message);
+}, null);

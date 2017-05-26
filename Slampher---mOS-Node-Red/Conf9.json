@@ -1,0 +1,16 @@
+{
+  "mqtt": {
+    "enable": true, 
+    "server": "192.168.0.100:1883", 
+    "user": "admin", 
+    "pass": "050684851" 
+  },
+  "wifi": {
+    "sta": {
+      "enable": true, 
+      "ssid": "Barkai_Nadav", 
+      "pass": "000619175d26", 
+      "gw": "192.168.0.1" 
+    }
+  }
+}

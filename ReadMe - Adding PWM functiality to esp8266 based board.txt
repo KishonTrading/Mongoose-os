@@ -1,5 +1,8 @@
 Adding PWM functiality to esp8266 based board
 PWM is only available on esp8266 currently.
+To (in seperate folders):
+1. Slampher---mOS-Node-Red
+2. Sonoff TH16---mOS-Node-Red
 
 From:  
 https://github.com/cesanta/mongoose-os/blob/master/fw/platforms/esp8266/src/esp_pwm.c
